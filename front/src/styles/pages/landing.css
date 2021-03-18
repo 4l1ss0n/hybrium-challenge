@@ -1,0 +1,132 @@
+.landing-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 5rem;
+  position: relative;
+  z-index: 0;
+}
+
+.landing-container .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  background: url(../../assets/background-image.jpeg) fixed center center no-repeat;
+  background-size: cover;
+  filter: blur(3px);
+}
+
+.landing-container .content-view {
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.landing-container .content-view .text-content-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f9f9f9;
+}
+
+.landing-container .content-view .text-content-view .title {
+  font-size: 3.5rem;
+  line-height: 5rem;
+}
+
+.landing-container .content-view .text-content-view .sub-title {
+  font-size: 3.3rem;
+  font-weight: 200;
+  line-height: 3rem;
+}
+
+.landing-container .content-view .text-content-view .logo {
+  font-size: 1.4rem;
+}
+
+.landing-container .content-view .form-view {
+  width: 400px;
+  background-color: #fafafa;
+  padding: 30px;
+  border-radius: 4px;
+}
+
+.landing-container .content-view .form-view .form-title {
+  margin-bottom: 2rem;
+}
+
+.landing-container .content-view .form-view .input {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.landing-container .content-view .form-view input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-bottom: 1px solid #aaaaaa;
+  padding-left: 6px;
+  background: transparent;
+}
+
+.landing-container .content-view .form-view #togglePassword {
+  position: absolute;
+  right: 6px;
+  top: 10px;
+  transform: scale(1.5);
+  color: #dddddd;
+  cursor: pointer;
+}
+
+.landing-container .content-view .form-view p {
+  font-size: 11px;
+  text-align: end;
+  color: #0066f0;
+  cursor: pointer;
+}
+
+.landing-container .content-view .form-view .btn-submit {
+  background-color: #0066f0;
+  width: 100%;
+  height: 40px;
+  color: #ffffff;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-container .content-view .form-view .btn-submit:hover {
+  background-color: #0049ae;
+}
+
+.landing-container .content-view .form-view .page-loading {
+  pointer-events: none;
+}
+
+.landing-container .content-view .form-view .page-loading .loading-view {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #aaaaaa;
+  background: transparent;
+  border-radius: 50%;
+  border-top: 2px solid #3e3e3e;
+  animation: loading 1s infinite ease;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
