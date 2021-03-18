@@ -46,11 +46,12 @@ const DetailsColaborator = (props: any) => {
     }
   }
 
-  function checkTime(defaultTime: string, currencyTime: string): string | void {
+  function checkTime(defaultTime: string, currencyTime: string | null): string | void {
+    if (!currencyTime) return '';
     const dTime = defaultTime.split(':').map(item => Number(item));
     const cTime = currencyTime.split(':').map(item => Number(item));
     if (
-      (dTime[0]*60 + dTime[1]) <
+      (dTime[0]*60 + dTime[1]) !==
       (cTime[0]*60 + cTime[1])
     ){
       return 'yellow'
@@ -73,7 +74,7 @@ const DetailsColaborator = (props: any) => {
       alert('problemas ao buscar colaborador');
     })
 
-  },[]);
+  },[id]);
 
   if(!user) return (
     <div className="loading-view"></div>
@@ -157,7 +158,7 @@ const DetailsColaborator = (props: any) => {
                         <strong>saiu</strong>
                         <br/>
                         <span
-                          className={`${checkTime(user.defaultTimeInExpedient, time.timeInExpedient)}`}
+                          className={`${checkTime(user.defaultTimeOutExpedient, time.timeOutExpedient)}`}
                         >
                           {
                             time.timeOutExpedient? time.timeOutExpedient: '--/--'
@@ -171,7 +172,7 @@ const DetailsColaborator = (props: any) => {
                         <strong>Entrou</strong>
                         <br/>
                         <span
-                          className={`${checkTime(user.defaultTimeInExpedient, time.timeInExpedient)}`}
+                          className={`${checkTime(user.defaultTimeInLunch, time.timeInLunch)}`}
                         >
                           {
                             time.timeInLunch? time.timeInLunch: '--/--'
@@ -182,7 +183,7 @@ const DetailsColaborator = (props: any) => {
                         <strong>saiu</strong>
                         <br/>
                         <span
-                          className={`${checkTime(user.defaultTimeInExpedient, time.timeInExpedient)}`}
+                          className={`${checkTime(user.defaultTimeOutLunch, time.timeOutLunch)}`}
                         >
                           {
                             time.timeOutLunch? time.timeOutLunch: '--/--'
