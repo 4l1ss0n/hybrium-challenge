@@ -5,7 +5,7 @@ import Times from '../models/Times';
 import sendEmail from '../../email/config';
 import CreateToken from '../auth/CreateToken';
 import { viewSingleUsersDetails } from '../view/UsersDetails';
-import { viewManyUserList, viewSingleUserList } from '../view/UsersList';
+import { viewManyUserList } from '../view/UsersList';
 import sequelize from '../../database/connection';
 import {v2 as cloudinary} from 'cloudinary';
 
@@ -16,7 +16,7 @@ export default class UserControllers {
       where: {
         isDeleted: false
       },
-    })
+    });
     if (!data) return res.json([]);
     return res.json(viewManyUserList(data));
   };
@@ -35,10 +35,13 @@ export default class UserControllers {
       defaultTimeOutLunch
     } = req.body;
     try {
-      if (!(name && email && cpf && number && defaultTimeInExpedient && defaultTimeInLunch && defaultTimeOutExpedient && defaultTimeOutLunch)) return res.status(406).json({err: 'Missing datas'});
+      if (!(name && email && cpf && number
+        && defaultTimeInExpedient && defaultTimeInLunch
+        && defaultTimeOutExpedient && defaultTimeOutLunch
+      )) return res.status(406).json({err: 'Missing datas'});
 
-      const alrealyExist = await Users.findOne({ where: { email }})
-      if (alrealyExist) return res.status(405).json({err: 'email alrealy registered'})
+      const alrealyExist = await Users.findOne({ where: { email }});
+      if (alrealyExist) return res.status(405).json({err: 'email alrealy registered'});
       
       const password ='#' + crypto.randomBytes(5).toString('hex');
       const passwordHash = crypto.createHash('md5').update(`${name}${password}`).digest('base64');
@@ -48,11 +51,11 @@ export default class UserControllers {
         await cloudinary.uploader.upload(photo, {
           folder: 'hybrium'
         }, function(err, result) {
-          if (!result) return ;
+          if (!result) return;
           
           photoUrl = result.url
-          return
-        })
+          return;
+        });
       }
 
       const user = await Users.create({
@@ -93,7 +96,7 @@ export default class UserControllers {
       return res.json(viewSingleUsersDetails({user, times}));
     } catch (err) {
       return res.status(500).json({oops: err.message});
-    }
+    };
   };
 
   async Delete(req: Req, res: Res): Promise<Res> {
@@ -126,6 +129,50 @@ export default class UserControllers {
       return res.status(200).json({ deleted: true });
     } catch (err) {
       return res.status(500).json({oops: err.message});      
+    };
+  };
+
+  async Update(req: Req, res: Res): Promise<Res> {
+    const {
+      ocupation,
+      defaultTimeInExpedient,
+      defaultTimeInLunch,
+      defaultTimeOutExpedient,
+      defaultTimeOutLunch
+    } = req.body;
+    const {id} = req.params;
+
+    try {
+      if (!(
+        ocupation
+        || defaultTimeInExpedient
+        || defaultTimeInLunch
+        || defaultTimeOutExpedient
+        || defaultTimeOutLunch
+      )) return res.status(406).json({err: 'missing datas'});
+
+      const user = await Users.findOne({
+        where: {
+          id,
+          isDeleted: false
+        }
+      });
+      if (!user) return res.status(404).json({err: 'user not found'});
+
+      await Users.update({
+        ocupation: ocupation? ocupation: user.ocupation,
+        defaultTimeInExpedient: defaultTimeInExpedient? defaultTimeInExpedient: user.defaultTimeInExpedient,
+        defaultTimeInLunch: defaultTimeInLunch? defaultTimeInLunch: user.defaultTimeInLunch,
+        defaultTimeOutExpedient: defaultTimeOutExpedient? defaultTimeOutExpedient: user.defaultTimeOutExpedient,
+        defaultTimeOutLunch: defaultTimeOutLunch? defaultTimeOutLunch: user.defaultTimeOutLunch,
+      },{
+        where: {
+          id
+        }
+      })
+      return res.json({updated: true});
+    } catch (err) {
+      return res.status(500).json({oops: err.message});
     }
   };
 
@@ -133,7 +180,7 @@ export default class UserControllers {
     const creadentials = req.headers.authorization;
 
     try {
-      if (!creadentials) return res.status(406).json({err: 'Missing data'})
+      if (!creadentials) return res.status(406).json({err: 'Missing data'});
       const [basic, datas] = creadentials.split(' ');
       const [email, password] = Buffer.from(datas, 'base64').toString().split(':');
 
@@ -150,8 +197,7 @@ export default class UserControllers {
         id: user.id
       });
     } catch (err) {
-      return res.status(500).json({oops: err.message})
-    }
-
-  }
+      return res.status(500).json({oops: err.message});
+    };
+  };
 }
