@@ -40,7 +40,7 @@ describe('list',() => {
 });
 
 describe('delete',() => {
-  beforeEach( async () => { truncate() })
+  beforeEach( async () => { truncate() });
   it('should be able update a existent user at database', async () => {
     jest.setTimeout(20000);
     const user = await createUser();

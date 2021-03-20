@@ -14,4 +14,4 @@ export default async () => {
     defaultTimeOutLunch: "13:00"
   });
   return user;
-}
+};

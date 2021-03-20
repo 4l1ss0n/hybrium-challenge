@@ -26,10 +26,10 @@ interface Input {
     createdAt: Date; 
     updatedAt: Date;
   }> 
-}
+};
 
 export function viewManyUsersDetails(userArray: [any]): Array<{}> {
-  return userArray.map(user => viewSingleUsersDetails(user))
+  return userArray.map(user => viewSingleUsersDetails(user));
 }
 
 export function viewSingleUsersDetails(user: any): {} {
@@ -53,5 +53,5 @@ export function viewSingleUsersDetails(user: any): {} {
       timeInLunch: time.timeInLunch,
       timeOutLunch: time.timeOutLunch
     }))
-  }
-}
+  };
+};

@@ -7,4 +7,4 @@ export default async () => {
   await Times.truncate({force: true});
 
   return 'clear';
-}
+};

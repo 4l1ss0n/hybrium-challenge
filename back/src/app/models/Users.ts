@@ -24,9 +24,9 @@ export interface UserTypes {
   updatedAt?: Date;
 };
 
-interface UserAttibutes extends Optional<UserTypes, "id"> {}
+interface UserAttibutes extends Optional<UserTypes, "id"> {};
 
-export interface UsersDefine extends Model<UserTypes, UserAttibutes>, UserTypes {}
+export interface UsersDefine extends Model<UserTypes, UserAttibutes>, UserTypes {};
 
 const Users = sequelize.define<UsersDefine>('Users',{
   id: {
@@ -98,6 +98,6 @@ Users.hasMany(Times, {
   sourceKey: 'id',
   foreignKey: 'userId',
   as: 'Times'
-})
+});
 
 export default Users;

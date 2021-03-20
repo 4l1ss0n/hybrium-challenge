@@ -17,8 +17,7 @@ export default class AdminControllers {
         id
       });
     } catch (err) {
-      return res.status(500).json({oops: err.message})
-    }
-
-  }
-}
+      return res.status(500).json({oops: err.message});
+    };
+  };
+};

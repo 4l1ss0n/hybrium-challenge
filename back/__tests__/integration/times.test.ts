@@ -10,10 +10,10 @@ describe('create', () => {
     const user = await createUser();
     
     const time: Response = await supertest(app).post('/times/create').send({
-     timeIn: '08:30',
-     headers: {
-       authorization: `Baerer ${user.body.token}`
-     } 
-    })
-  })
-})
+      timeIn: '08:30',
+      headers: {
+        authorization: `Baerer ${user.body.token}`
+      }
+    });
+  });
+});

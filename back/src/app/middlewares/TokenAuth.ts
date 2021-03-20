@@ -10,7 +10,7 @@ export default (req: Req, res: Res, next: Next) => {
 
   const splitedAuth = auth.split(' ');
 
-  if (splitedAuth.length !== 2) return res.status(401).json({err: 'Malformed token'})
+  if (splitedAuth.length !== 2) return res.status(401).json({err: 'Malformed token'});
 
   const [baerer, token] = splitedAuth;
 
@@ -18,5 +18,5 @@ export default (req: Req, res: Res, next: Next) => {
     if (err) return res.status(401).json({err: 'Invalid token'});
     req.headers.authorization = decoded.id;
     next();    
-  })
-}
+  });
+};

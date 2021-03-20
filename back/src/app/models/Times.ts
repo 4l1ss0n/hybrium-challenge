@@ -12,11 +12,11 @@ export interface TimeTypes {
   userIsDeleted: boolean;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
-interface TimesAttributes extends Optional<TimeTypes, "id"> {}
+interface TimesAttributes extends Optional<TimeTypes, "id"> {};
 
-interface TimesDefine extends Model<TimesAttributes, TimeTypes>,TimeTypes {}
+interface TimesDefine extends Model<TimesAttributes, TimeTypes>,TimeTypes {};
 
 const Times = sequelize.define<TimesDefine>('Times',{
   id: {
@@ -56,7 +56,6 @@ const Times = sequelize.define<TimesDefine>('Times',{
   updatedAt: {
     type: DataTypes.DATE
   },
-})
-
+});
 
 export default Times;

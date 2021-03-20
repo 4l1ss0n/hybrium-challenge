@@ -3,7 +3,6 @@ import routes from './routes';
 import cors from 'cors';
 import {v2 as cloud} from 'cloudinary';
 import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
 
 dotenv.config();
 cloud.config({

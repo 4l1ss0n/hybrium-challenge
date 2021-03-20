@@ -34,7 +34,7 @@ const sendEmail = async ({name, password, email}: SendEmailProps): Promise<void>
     subject: "Sua Senha de acesso" ,
     text: htmlToSend, 
     html: htmlToSend
-  }
+  };
   const information = await transport.sendMail(mailOptions);
 
   console.log("email:", nodemailer.getTestMessageUrl(information));

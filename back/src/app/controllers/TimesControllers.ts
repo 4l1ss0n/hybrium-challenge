@@ -14,7 +14,7 @@ export default class TimesControllers {
       const time = await Times.create({
         userId,
         timeInExpedient: timeValue
-      } as TimeTypes)
+      } as TimeTypes);
       
       return res.json({created: true});
     } catch (err) {

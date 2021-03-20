@@ -13,6 +13,7 @@ const Admin = new AdminControllers;
 routes.get('/user', User.Index);
 routes.post('/user', User.Store);
 routes.get('/user/details', User.Show);
+routes.get('/user/update/:id', User.Update);
 routes.delete('/user/:id', User.Delete);
 routes.get('/login', User.Login);
 
