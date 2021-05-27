@@ -138,7 +138,8 @@ export default class UserControllers {
       defaultTimeInExpedient,
       defaultTimeInLunch,
       defaultTimeOutExpedient,
-      defaultTimeOutLunch
+      defaultTimeOutLunch,
+      tellNumber
     } = req.body;
     const {id} = req.params;
 
@@ -149,6 +150,7 @@ export default class UserControllers {
         || defaultTimeInLunch
         || defaultTimeOutExpedient
         || defaultTimeOutLunch
+        || tellNumber
       )) return res.status(406).json({err: 'missing datas'});
 
       const user = await Users.findOne({
@@ -165,6 +167,7 @@ export default class UserControllers {
         defaultTimeInLunch: defaultTimeInLunch? defaultTimeInLunch: user.defaultTimeInLunch,
         defaultTimeOutExpedient: defaultTimeOutExpedient? defaultTimeOutExpedient: user.defaultTimeOutExpedient,
         defaultTimeOutLunch: defaultTimeOutLunch? defaultTimeOutLunch: user.defaultTimeOutLunch,
+        tellNumber: tellNumber? tellNumber: user.tellNumber
       },{
         where: {
           id
